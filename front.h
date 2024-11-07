@@ -1,12 +1,19 @@
+#include <ctype.h>
+#include <string.h>
+#include <stdio.h>
+
 #ifndef FRONT_H
 #define FRONT_H
 
 /* Character classes */
 #define LETTER 0
 #define DIGIT 1
-#define UNKNOWN 99
+
+
+//#define UNKNOWN 99
 
 /* Token codes */
+/*
 #define INT_LIT 10
 #define IDENT 11
 #define ASSIGN_OP 20
@@ -16,7 +23,7 @@
 #define DIV_OP 24
 #define LEFT_PAREN 25
 #define RIGHT_PAREN 26
-
+*/
 
 
 int lex();

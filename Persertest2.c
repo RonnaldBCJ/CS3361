@@ -1,11 +1,8 @@
 
 
-#include <ctype.h>
-#include <string.h>
-#include <stdio.h>
 
-
-
+#include "front.h"
+#include "parser.h"
 /* Token types */
 typedef enum {
     IDENT, INT_LIT, ASSIGN_OP, ADD_OP, SUB_OP, MULT_OP, DIV_OP, MOD_OP,
@@ -31,11 +28,14 @@ static void getNonBlank();
 static int lookup(char ch);
 static TokenType getToken(const char *lexeme);
 static void printToken(const char *lexeme, TokenType token);
+int lex();  // Forward declaration of lex function
 
 /******************************************************/
 /* main driver */
 int main(int argc, char *argv[]) 
 {
+    printf("Cooke Analyzer :: R11825913\n");
+
     if (argc != 2) {
         printf("Usage: %s <path_to_source_file>\n", argv[0]);
         return 1;
@@ -45,7 +45,6 @@ int main(int argc, char *argv[])
     if ((in_fp = fopen(argv[1], "r")) == NULL) {
         printf("ERROR - cannot open %s\n", argv[1]);
     } else {
-        printf("Cooke Analyzer :: R123456\n");
         getChar();
         do {
             lex();
@@ -206,5 +205,5 @@ static void printToken(const char *lexeme, TokenType token) {
         "BOOL_AND", "BOOL_OR", "BOOL_NOT", "KEY_IN", "KEY_OUT", "KEY_IF", "KEY_ELSE",
         "OPEN_PAREN", "CLOSE_PAREN", "OPEN_CURL", "CLOSE_CURL", "SEMICOLON", "UNKNOWN"
     };
-    printf("%s %s\n", lexeme, tokenNames[token]);
+    printf("%s\t%s\n", lexeme, tokenNames[token]);
 }
