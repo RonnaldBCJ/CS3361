@@ -1,14 +1,12 @@
-all: parser
+CC		= gcc
+TARGET	= cooke_analyzer
+SRC		= Persertest2.c
+OBJ		= Persertest2.o
 
-parser: front.o parser.o
-	$(CC) -Wall front.o parser.o -o parser	
+all: $(TARGET)
 
-.c.o:
-	$(CC) -Wall -c $<
-
-
-test: parser front.in
-	./parser
+$(TARGET): $(OBJ)
+	$(CC) ${CFLAGS} -o $@ $(OBJ)
 
 clean:
-	$(RM) parser.o front.o parser
+	rm -f $(TARGET) $(OBJ)
