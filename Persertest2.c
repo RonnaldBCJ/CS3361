@@ -1,9 +1,9 @@
-
-
+//cd /mnt/c/Users/wyatt/OneDrive\ -\ Texas\ Tech\ University/Desktop/C\ FIles/parser/parser/
 
 #include "front.h"
+
 #include "parser.h"
-/* Token types */
+
 typedef enum {
     IDENT, INT_LIT, ASSIGN_OP, ADD_OP, SUB_OP, MULT_OP, DIV_OP, MOD_OP,
     LESSER_OP, GREATER_OP, EQUAL_OP, NEQUAL_OP, LEQUAL_OP, GEQUAL_OP,
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
 /*****************************************************/
 /* lookup - a function to lookup operators and parentheses and return the token */
-static int lookup(char ch) {
+static int lookup(char ch || char ch[]) {
     switch (ch) {
         case '=':
             addChar();
@@ -110,6 +110,7 @@ static int lookup(char ch) {
             addChar();
             nextToken = SEMICOLON;
             break;
+        
         default:
             addChar();
             nextToken = UNKNOWN;
@@ -117,11 +118,47 @@ static int lookup(char ch) {
     }
     return nextToken;
 }
-
+static int lookupString(const char* str) {
+    if (strncmp(str, "input", 5) == 0) {
+        addChar();
+        nextToken = KEY_IN;
+    } else if (strncmp(str, "output", 6) == 0) {
+        addChar();
+        nextToken = KEY_OUT;
+    } else if (strncmp(str, "if", 2) == 0) {
+        addChar();
+        nextToken = KEY_IF;
+    } else if (strncmp(str, "else", 4) == 0) {
+        addChar();
+        nextToken = KEY_ELSE;
+    } else if (strncmp(str, "EQUAL_OP", 8) == 0) {
+        addChar();
+        nextToken = EQUAL_OP;
+    } else if (strncmp(str, "!=", 2) == 0) {
+        addChar();
+        nextToken = NEQUAL_OP;
+    } else if (strncmp(str, "<=", 2) == 0) {
+        addChar();
+        nextToken = LEQUAL_OP;
+    } else if (strncmp(str, ">=", 2) == 0) {
+        addChar();
+        nextToken = GEQUAL_OP;
+    } else if (strncmp(str, "&&", 2) == 0) {
+        addChar();
+        nextToken = BOOL_AND;
+    } else if (strncmp(str, "||", 2) == 0) {
+        addChar();
+        nextToken = BOOL_OR;
+    } else {
+        addChar();
+        nextToken = UNKNOWN;
+    }
+    return nextToken;
+}
 /*****************************************************/
 /* addChar - a function to add nextChar to lexeme */
 static void addChar() {
-    if (lexLen <= 98) {
+    if (lexLen < 98) {
         lexeme[lexLen++] = nextChar;
         lexeme[lexLen] = 0;
     } else {
@@ -205,5 +242,9 @@ static void printToken(const char *lexeme, TokenType token) {
         "BOOL_AND", "BOOL_OR", "BOOL_NOT", "KEY_IN", "KEY_OUT", "KEY_IF", "KEY_ELSE",
         "OPEN_PAREN", "CLOSE_PAREN", "OPEN_CURL", "CLOSE_CURL", "SEMICOLON", "UNKNOWN"
     };
-    printf("%s\t%s\n", lexeme, tokenNames[token]);
+     if (token >= 0 && token <= UNKNOWN) {
+        printf("%s\t%s\n", lexeme, tokenNames[token]);
+    } else {
+        printf("Error: Invalid token value\n");
+    }
 }
