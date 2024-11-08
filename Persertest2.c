@@ -4,12 +4,6 @@
 
 #include "parser.h"
 
-typedef enum {
-    IDENT, INT_LIT, ASSIGN_OP, ADD_OP, SUB_OP, MULT_OP, DIV_OP, MOD_OP,
-    LESSER_OP, GREATER_OP, EQUAL_OP, NEQUAL_OP, LEQUAL_OP, GEQUAL_OP,
-    BOOL_AND, BOOL_OR, BOOL_NOT, KEY_IN, KEY_OUT, KEY_IF, KEY_ELSE,
-    OPEN_PAREN, CLOSE_PAREN, OPEN_CURL, CLOSE_CURL, SEMICOLON, UNKNOWN
-} TokenType;
 
 /* Global Variable */
 int nextToken;
